@@ -90,6 +90,7 @@ public class ProcessorHelper implements SuccinctHelper {
     }
 
     public JCTree.JCBlock inlineAnnotationFields(JCTree.JCBlock body, AnnotationMirror annotation) {
+        if (body == null) return null;
         AnnotationValueReplacer replacer = new AnnotationValueReplacer(annotation);
         this.copy(body).accept(replacer);
         return (JCTree.JCBlock) replacer.getResult();
@@ -247,6 +248,7 @@ public class ProcessorHelper implements SuccinctHelper {
     }
 
     public JCTree.JCBlock replaceParameterReferences(JCTree.JCBlock body, Map<String, String> replacements) {
+        if (body == null) return null;
         ParamNameReplacer replacer = new ParamNameReplacer(replacements);
         JCTree.JCBlock copied = this.copy(body);
         copied.accept(replacer);
@@ -347,21 +349,28 @@ public class ProcessorHelper implements SuccinctHelper {
     }
 
     public JCTree.JCExpression replaceContext(JCTree.JCExpression expression, String fieldName) {
+        if (expression == null) return null;
         ContextReplacer replacer = new ContextReplacer(fieldName);
         this.copy(expression).accept(replacer);
         return (JCTree.JCExpression) replacer.getResult();
     }
 
     public JCTree.JCBlock generateOriginalMethodCalls(JCTree.JCBlock toModify, JCTree.JCBlock original) {
+        if (toModify == null) return null;
         GeneratedBodyReplacer replacer = new GeneratedBodyReplacer(original);
         this.copy(toModify).accept(replacer);
         return (JCTree.JCBlock) replacer.getResult();
     }
 
     public JCTree.JCBlock replaceContext(JCTree.JCBlock block, String fieldName) {
+        if (block == null) return null;
         ContextReplacer replacer = new ContextReplacer(fieldName);
         this.copy(block).accept(replacer);
         return (JCTree.JCBlock) replacer.getResult();
+    }
+
+    public JCTree copy(JCTree tree) {
+        return new TreeCopier<>(context.maker()).copy(tree);
     }
 
     public JCTree.JCBlock copy(JCTree.JCBlock statement) {
