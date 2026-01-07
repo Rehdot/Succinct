@@ -9,6 +9,7 @@ import com.sun.tools.javac.util.ListBuffer;
 import me.redot.succinct.api.annotation.extra.Attr;
 import me.redot.succinct.internal.maker.TypeReference;
 import me.redot.succinct.internal.replacer.*;
+import me.redot.succinct.internal.util.JdkReflectionUtil;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeMirror;
@@ -35,13 +36,13 @@ public class ProcessorHelper implements SuccinctHelper {
         ListBuffer<JCTree.JCImport> toAdd = new ListBuffer<>();
 
         for (JCTree.JCImport imp : toUnit.getImports()) {
-            String qualifiedName = imp.qualid.toString();
+            String qualifiedName = JdkReflectionUtil.getQualid(imp).toString();
             String simpleName = this.getSimpleName(qualifiedName);
             nameMap.put(simpleName, qualifiedName);
         }
 
         for (JCTree.JCImport imp : fromUnit.getImports()) {
-            String qualifiedName = imp.qualid.toString();
+            String qualifiedName = JdkReflectionUtil.getQualid(imp).toString();
             String simpleName = this.getSimpleName(qualifiedName);
 
             if (nameMap.containsKey(simpleName)) {
