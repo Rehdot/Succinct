@@ -14,7 +14,7 @@ how the user wants their code to compile. The important
 patterns are Authors, Modifiers, and Attributes.
 
 **Authors** (`@Authored`) generate brand-new elements,
-while **Modifiers** (`@Modifier`) alter existing elements.
+while **Modifiers** (`@Modified`) alter existing elements.
 **Attributes** (`Attr`) control what is generated or changed.
 
 ---
@@ -288,6 +288,15 @@ author classes are, by default, removed after Succinct's processing finishes.
     <artifactId>processor</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
+```
+
+- This repository is hosted publicly via [Zenith Studios](https://github.com/Zenith-Studios). Feel free to use this in your project!
+```xml
+<repository>
+    <id>zenith-artifactory</id>
+    <name>Succinct</name>
+    <url>https://artifactory.zenithstudios.dev/artifactory/succinct</url>
+</repository>
 ```
 
 ---

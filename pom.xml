@@ -20,4 +20,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>zenith-artifactory</id>
+            <name>Zenith Studios Artifactory</name>
+            <url>https://artifactory.zenithstudios.dev/artifactory/succinct</url>
+        </repository>
+    </distributionManagement>
+
 </project>
